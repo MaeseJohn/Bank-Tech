@@ -41,12 +41,9 @@ func BuyInvoiceHandler(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "Error handling token claims")
 	}
 
-	gorm := db.DataBase().Table("users").Where("user_id = ?", claims["user_id"].(string)).Select("email")
-	if gorm.Error != nil {
-		return c.String(http.StatusInternalServerError, gorm.Error.Error())
-	}
-	if gorm.RowsAffected == 0 {
-		return c.String(http.StatusNotFound, "Issuer not found")
+	var user models.User
+	if err := db.DataBase().Where("user_id = ?", claims["user_id"].(string)).Find(&user).Error; err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
 	tx := db.DataBase().Begin()

@@ -24,9 +24,9 @@ var unregisterIssuerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bm
 
 // Valid users for data base
 var validUsers = []models.User{
-	*models.NewUser(uuid.NewString(), "jonathan@gmail.com", "jonathan", "jonathan", "issuer", 1000),
-	*models.NewUser(uuid.NewString(), "loris@gmail.com", "loris", "loris", "issuer", 600),
-	*models.NewUser(uuid.NewString(), "elisa@gmail.com", "elisa", "elisa", "investor", 10000),
+	*models.NewUser("ae215592-5c65-11ee-8c99-0242ac120002", "jonathan@gmail.com", "jonathan", "jonathan", "issuer", 1000),
+	*models.NewUser("87224e57-188e-4211-bbb2-c27dca02fa10", "loris@gmail.com", "loris", "loris", "issuer", 600),
+	*models.NewUser("6520a148-88f5-45a4-a187-883cfebcf985", "elisa@gmail.com", "elisa", "elisa", "investor", 10000),
 }
 
 // Valid invoices

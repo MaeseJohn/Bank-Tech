@@ -90,8 +90,8 @@ func TestLogin(t *testing.T) {
 		{"Unprocessable email", "12341234", "jonathan", http.StatusUnprocessableEntity, ""},
 		{"Unregister email", "jonasfas@gmail.com", "jonathan", http.StatusUnauthorized, ""},
 		{"Incorrect password", validUsers[0].Email, "Maese", http.StatusUnauthorized, ""},
-		{"Valid parameters", validUsers[0].Email, validUsers[0].Password, http.StatusOK, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bmRzIjoxMDAwLCJ1c2VyX2lkIjoiNGRkYmIzN2ItZWZkNS00NTY0LWEyYmEtYzRhYzgwOTI1YjlmIiwidXNlcl9yb2xlIjoiaXNzdWVyIn0.H30BMZ4Eq8Ujj0_YJJUhC7IB49qxJxIfwdRy-GAsAI8"},
-		{"Valid parameters", validUsers[1].Email, validUsers[1].Password, http.StatusOK, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bmRzIjo2MDAsInVzZXJfaWQiOiJhZTIxNTU5Mi01YzY1LTExZWUtOGM5OS0wMjQyYWMxMjAwMDIiLCJ1c2VyX3JvbGUiOiJpc3N1ZXIifQ.Oy882kyZjMbe8b8E5nd7HZiNLXQQYSbDWM66O3bPnjQ"},
+		{"Valid parameters", validUsers[0].Email, validUsers[0].Password, http.StatusOK, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bmRzIjoxMDAwLCJ1c2VyX2lkIjoiYWUyMTU1OTItNWM2NS0xMWVlLThjOTktMDI0MmFjMTIwMDAyIiwidXNlcl9yb2xlIjoiaXNzdWVyIn0.4dbWRmpvXuXOY4VLudyMYa2E0e9mQQBqP58ux0-vNRY"},
+		{"Valid parameters", validUsers[1].Email, validUsers[1].Password, http.StatusOK, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bmRzIjo2MDAsInVzZXJfaWQiOiI4NzIyNGU1Ny0xODhlLTQyMTEtYmJiMi1jMjdkY2EwMmZhMTAiLCJ1c2VyX3JvbGUiOiJpc3N1ZXIifQ.bcBsPTc_lVxL6vom3MQuMf_CTHJMzTAL1GT-VNEp8u4"},
 		{"Valid parameters", validUsers[2].Email, validUsers[2].Password, http.StatusOK, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2Z1bmRzIjoxMDAwMCwidXNlcl9pZCI6IjY1MjBhMTQ4LTg4ZjUtNDVhNC1hMTg3LTg4M2NmZWJjZjk4NSIsInVzZXJfcm9sZSI6ImludmVzdG9yIn0.XxNTtL521_lVAgwioVwZpPUPbhJpYDOYt8-YNYgl-ZM"},
 	}
 

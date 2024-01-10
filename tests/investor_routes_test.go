@@ -19,8 +19,6 @@ func TestBuyInvoice(t *testing.T) {
 	status := CreateInvoiceRequest(&validInvoices[0], issuerToken)
 	require.Equal(t, http.StatusCreated, status)
 
-	//Nombre error t.Run(nombre funcion)
-	//http constantes
 	var buyParameters = []struct {
 		name      string
 		invoiceId string
@@ -30,20 +28,20 @@ func TestBuyInvoice(t *testing.T) {
 	}{
 
 		// Invalid tokens
-		{"Zero value token", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 101, "", http.StatusUnauthorized},
-		{"Invalid token", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 102, invalidToken, http.StatusUnauthorized},
-		{"Issuer token", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 100, issuerToken, http.StatusForbidden},
-		{"Unresgister Usertoken", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 100, unregisterInvestorToken, http.StatusNotFound},
+		{"Zero value token", validInvoices[0].InvoiceId, 101, "", http.StatusUnauthorized},
+		{"Invalid token", validInvoices[0].InvoiceId, 102, invalidToken, http.StatusUnauthorized},
+		{"Issuer token", validInvoices[0].InvoiceId, 100, issuerToken, http.StatusForbidden},
+		{"Unresgister Usertoken", validInvoices[0].InvoiceId, 100, unregisterInvestorToken, http.StatusNotFound},
 		// Invalid uuid
 		{"Not uuid", "hola", 1000, investorToken, http.StatusUnprocessableEntity},
 		{"Unregister uuid", "4ddbb37b-efd5-4564-a2ba-c4ac80925b9f", 100, investorToken, http.StatusNotFound},
 		// To many funds
-		{"To many funds", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 1000, investorToken, http.StatusForbidden},
+		{"To many funds", validInvoices[0].InvoiceId, 1000, investorToken, http.StatusForbidden},
 		// Valid purcharse
-		{"Valid purcharse", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 100, investorToken, http.StatusOK},
-		{"Valid purcharse", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 400, investorToken, http.StatusOK},
+		{"Valid purcharse", validInvoices[0].InvoiceId, 100, investorToken, http.StatusOK},
+		{"Valid purcharse", validInvoices[0].InvoiceId, 400, investorToken, http.StatusOK},
 		// Closed invoice
-		{"Closed invoice", "4a9d32f2-9b26-11ee-b9d1-0242ac120002", 100, investorToken, http.StatusNotFound},
+		{"Closed invoice", validInvoices[0].InvoiceId, 100, investorToken, http.StatusNotFound},
 	}
 
 	for _, p := range buyParameters {

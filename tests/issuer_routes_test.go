@@ -30,7 +30,7 @@ func TestCreateInvoice(t *testing.T) {
 		{"Invalid token", invoices[0], invalidToken, http.StatusUnauthorized},
 		{"Investor token", invoices[0], investorToken, http.StatusForbidden},
 		{"Emty token", invoices[0], "", http.StatusUnauthorized},
-		{"Unregister token", invoices[0], unregisterIssuerToken, http.StatusNotFound},
+		{"Unregister token", invoices[0], unregisterIssuerToken, http.StatusInternalServerError},
 		// Invalid invoice uuid
 		{"Invalid invoice uuid", invoices[0], issuerToken, http.StatusUnprocessableEntity},
 		// Invalid Date

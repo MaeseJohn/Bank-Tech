@@ -4,6 +4,7 @@ import (
 	"API_Rest/db"
 	"API_Rest/middleware"
 	"API_Rest/models"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -25,17 +26,17 @@ func CreateInvoiceHandler(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "Error reading token claims")
 	}
 
-	gorm := db.DataBase().Table("users").Where("user_id = ?", claims["user_id"].(string)).Select("COUNT(*)")
-	if gorm.Error != nil {
-		return c.String(http.StatusInternalServerError, gorm.Error.Error())
-
+	var user models.User
+	if err := db.DataBase().Where("user_id = ?", claims["user_id"].(string)).First(&user).Error; err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	if gorm.RowsAffected == 0 {
-		return c.String(http.StatusNotFound, "Issuer not found")
-	}
+	fmt.Printf("%v", invoice)
 
 	invoice.Status = "open"
 	invoice.IssuerPk = claims["user_id"].(string)
+
+	fmt.Printf("%v", invoice)
+	fmt.Println("                                     ")
 
 	if err := c.Validate(invoice); err != nil {
 		return c.String(http.StatusUnprocessableEntity, err.Error())
@@ -46,7 +47,7 @@ func CreateInvoiceHandler(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
-	return c.String(http.StatusCreated, err.Error())
+	return c.String(http.StatusCreated, "Created")
 }
 
 func ApproveInvoiceHandler(c echo.Context) error {
