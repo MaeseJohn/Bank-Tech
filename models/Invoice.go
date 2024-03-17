@@ -26,14 +26,14 @@ func (i *Invoice) AllowendPurcharseFunds(prucharseFunds int) bool {
 	return available >= prucharseFunds
 }
 
-// If the invoice has been fully purcharsed its status changes to "waiting"
+// If the invoice has been fully purcharsed it status changes to "waiting"
 func (i *Invoice) Sold() {
 	if i.Price == i.Funds {
 		i.Status = "waiting"
 	}
 }
 
-// increases the amount of funds indicated by parameter
+// Increases the amount of funds indicated by parameter
 func (i *Invoice) Sales(x int) {
 	i.Funds += x
 }

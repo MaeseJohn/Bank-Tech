@@ -104,7 +104,7 @@ func TestConcurrentInvoicePurchase(t *testing.T) {
 	}
 
 	var randomInvoices [20]*models.Invoice
-	for i, _ := range randomInvoices {
+	for i := range randomInvoices {
 		randomInvoices[i] = models.NewInvoice(uuid.NewString(), "invoice", "2050-01-01", (rand.Intn(50)+10)*100)
 	}
 
@@ -122,6 +122,7 @@ func TestConcurrentInvoicePurchase(t *testing.T) {
 		_ = CreateInvoiceRequest(i, tokenString)
 	}
 
+	// Creating a broadcaster to difetent go routines to call it at the same time and made a concurrency test
 	var b broadcast.Broadcaster
 	var wg sync.WaitGroup
 	for i := 0; i < 100; i++ {
@@ -134,7 +135,7 @@ func TestConcurrentInvoicePurchase(t *testing.T) {
 
 		go func() {
 			defer wg.Done()
-			for _ = range l.Ch {
+			for range l.Ch {
 				BuyInvoice(invoice.InvoiceId, tokenString, invested)
 			}
 		}()

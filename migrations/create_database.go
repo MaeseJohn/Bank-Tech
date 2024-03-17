@@ -19,7 +19,7 @@ func CreateDataBase() {
 	migrationsDir := os.Getenv("MIGRATIONS_DIR")
 	var err error
 	pg := postgres.Open("postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-	gdb, err := gorm.Open(pg, &gorm.Config{
+	gdb, _ := gorm.Open(pg, &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	db, err := gdb.DB()

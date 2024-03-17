@@ -6,7 +6,7 @@ type InvoiceRecord struct {
 	InvestedFunds int    `validate:"required"`
 }
 
-// Create new *InvoiceRecord object Parameters: InvoicePK, InvestorPK, InvestedFunds
+// Invoice record constructor
 func NewRecord(invoicePk, investorPk string, investedFunds int) InvoiceRecord {
 	var invoiceRecord InvoiceRecord
 	invoiceRecord.InvoicePk = invoicePk

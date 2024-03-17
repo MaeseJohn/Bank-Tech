@@ -7,6 +7,8 @@ import (
 )
 
 func CheckInvoice(c echo.Context) error {
-	RefuseExpiredInvoices()
-	return c.String(http.StatusOK, "all delete")
+	if err := RefuseExpiredInvoices(); err != nil {
+		return c.String(http.StatusBadRequest, "Error handling the expired invoices")
+	}
+	return c.String(http.StatusOK, "Refuse expired invoices done correctly")
 }

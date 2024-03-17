@@ -13,8 +13,6 @@ type User struct {
 	Role     string `validate:"required,oneof=issuer investor"`
 }
 
-// TODO: review enryption
-// https://stackoverflow.com/questions/16891729/best-practices-salting-peppering-passwords
 func (u *User) HashSaltPassword() error {
 	password := []byte(u.Password)
 	//Hashing the password with the default cost of 10
@@ -24,12 +22,13 @@ func (u *User) HashSaltPassword() error {
 	return err
 }
 
-// Returns false if the password is correct, true if not
+// Returns true if the password is correct, false if not
 func (u *User) ValidatePassword(hashedPassword string, password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-	return err != nil
+	return err == nil
 }
 
+// User constructor
 func NewUser(userid, email, password, name, role string, funds int) *User {
 	var user User
 	user.UserId = userid

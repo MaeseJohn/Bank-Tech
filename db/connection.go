@@ -15,6 +15,7 @@ func DataBase() *gorm.DB {
 	return db
 }
 
+// This is the function to connect with the data base
 func Connection() {
 	var err error
 	db, err = gorm.Open(postgres.Open(os.Getenv("DNS")), &gorm.Config{})
